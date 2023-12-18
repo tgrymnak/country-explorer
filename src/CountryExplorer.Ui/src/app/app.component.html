@@ -1,0 +1,12 @@
+<p-scrollTop></p-scrollTop>
+<p-toast [breakpoints]="{'920px': {width: '100%', right: '0', left: '0'}}"></p-toast>
+
+<p-confirmDialog #cd header="{{ 'Confirmation' | translate }}" icon="pi pi-exclamation-triangle">
+	<ng-template pTemplate="footer">
+		<p-button icon="pi pi-times" label="{{ 'No' | translate }}" styleClass="p-button-text" (click)="cd.reject()"
+			autofocus></p-button>
+		<p-button icon="pi pi-check" label="{{ 'Yes' | translate }}" (click)="cd.accept()"></p-button>
+	</ng-template>
+</p-confirmDialog>
+
+<router-outlet></router-outlet>

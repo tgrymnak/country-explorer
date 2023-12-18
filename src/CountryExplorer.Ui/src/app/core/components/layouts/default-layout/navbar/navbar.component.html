@@ -1,0 +1,41 @@
+<div class="surface-0 py-3 px-6 shadow-1 flex align-items-center justify-content-between sticky lg:static top-0 z-5">
+	<a pRipple (click)="toggleSidebar()" class="cursor-pointer block lg:hidden text-700">
+		<i class="pi pi-bars text-4xl"></i>
+	</a>
+	<div class="surface-0 hidden lg:flex flex-grow-1 align-items-center justify-content-end w-full">
+		<nav class="p-0 m-0 flex align-items-center select-none">
+			<a pRipple routerLink="/" routerLinkActive="text-blue-400" [routerLinkActiveOptions]="{ exact:true }"
+				class="flex p-3 py-2 align-items-center text-500 hover:text-blue-400 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+				<span>{{ 'Home' | translate }}</span>
+			</a>
+			<a pRipple routerLink="/countries" routerLinkActive="text-blue-400"
+				[routerLinkActiveOptions]="{ exact:true }"
+				class="flex p-3 py-2 align-items-center text-500 hover:text-blue-400 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+				<span>{{ 'Countries' | translate }}</span>
+			</a>
+		</nav>
+		<div>
+			<p-button (onClick)="switchTheme()" [rounded]="true" [text]="true"
+				icon="pi pi-{{ darkTheme ? 'sun' : 'moon' }}" styleClass="shadow-none mx-2"></p-button>
+		</div>
+	</div>
+</div>
+<p-sidebar [(visible)]="sidebarVisible" position="left" styleClass="surface-0">
+	<div class="px-6 py-3 mb-2 flex align-items-center justify-content-between border-bottom-1 surface-border">
+		<span routerLink="/" class="text-blue-500 text-3xl font-medium cursor-pointer">{{ 'Explorer' }}</span>
+		<p-button (onClick)="switchTheme()" [rounded]="true" [text]="true" icon="pi pi-{{ darkTheme ? 'sun' : 'moon' }}"
+			styleClass="shadow-none mx-2"></p-button>
+	</div>
+	<nav class="p-0 m-0 flex select-none flex-column">
+		<a pRipple routerLink="/" routerLinkActive="text-blue-400" [routerLinkActiveOptions]="{ exact:true }"
+			(click)="toggleSidebar()"
+			class="flex px-6 p-3 align-items-center text-500 hover:text-400 hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+			<span>{{ 'Home' | translate }}</span>
+		</a>
+		<a pRipple routerLink="/countries" routerLinkActive="text-blue-400" [routerLinkActiveOptions]="{ exact:true }"
+			(click)="toggleSidebar()"
+			class="flex px-6 p-3 align-items-center text-500 hover:text-400 hover:bg-gray-800 font-medium border-round cursor-pointer transition-colors transition-duration-150">
+			<span>{{ 'Countries' | translate }}</span>
+		</a>
+	</nav>
+</p-sidebar>

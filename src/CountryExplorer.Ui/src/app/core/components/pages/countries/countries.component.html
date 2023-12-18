@@ -1,0 +1,21 @@
+<div class="max-w-90rem m-auto">
+	<div class="surface-section p-4 px-6 lg:px-8 mt-2">
+		<div class="text-700 font-medium text-2xl">
+			<span>{{ 'Countries list' | translate }}</span>
+		</div>
+
+		<div class="flex flex-wrap align-items-center justify-content-between gap-2 py-4">
+			<div class="flex align-items-center w-full sm:w-auto">
+				<span class="p-input-icon-left">
+					<i class="pi pi-search"></i>
+					<input #search pInputText type="text" placeholder="{{ 'Search' | translate }}" />
+				</span>
+			</div>
+			<p-button label="{{ 'Clear filters' | translate }}" [text]="true" icon="pi pi-filter-slash"
+				(click)="lw.clearAllFilters()"></p-button>
+		</div>
+
+		<app-list-view-widget #lw [filter]="search.value" [items]="countries" [columns]="columns" dataKey="name"
+			[globalFilterFields]="globalFilterFields"></app-list-view-widget>
+	</div>
+</div>

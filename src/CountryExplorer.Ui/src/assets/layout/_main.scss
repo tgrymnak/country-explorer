@@ -1,0 +1,47 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: var(--font-family);
+	color: var(--text-color);
+	background-color: var(--surface-ground);
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+	width: 0rem;
+}
+
+a {
+	text-decoration: none;
+	color: var(--primary-color);
+}
+
+.absolute-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: fit-content;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.max-w-90rem {
+	max-width: 90rem !important;
+}
+
+.p-card-body {
+	overflow: scroll !important;
+}

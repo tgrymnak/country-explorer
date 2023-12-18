@@ -1,0 +1,72 @@
+<section>
+	<div class="surface-0 px-4 py-8 md:px-6 lg:px-8 select-none">
+		<div class="p-4">
+			<div class="flex flex-column py-4">
+				<h1 class="flex flex-column lg:flex-row text-7xl md:text-7xl font-bold text-blue-600 mb-0">
+					<span class="fadein animation-delay-100 animation-duration-1000 animation-ease-in">
+						{{ 'Country Explorer' | translate }}
+					</span>
+				</h1>
+				<div class="text-2xl pt-3 lg:pt-1 text-gray-500">
+					{{ 'Lookup countries easily' | translate }}
+				</div>
+			</div>
+			<div class="flex flex-wrap my-8">
+				<p-button routerLink="/countries" label="{{ 'Get Started' | translate }}" [size]="'large'"
+					[rounded]="true" styleClass="m-2">
+				</p-button>
+				<p-button (click)="scrollTo('section-about')" label="{{ 'Learn More' | translate }}" [size]="'large'"
+					[rounded]="true" [outlined]="true" styleClass="m-2">
+				</p-button>
+			</div>
+		</div>
+		<div class="hidden lg:flex srcoll-for-more justify-content-center relative">
+			<i
+				class="pi pi-chevron-down text-400 text-3xl fadeinup animation-delay-1000 animation-duration-2000 animation-iteration-infinite animation-ease-in-out"></i>
+		</div>
+	</div>
+</section>
+
+<section id="section-about">
+	<div class="surface-50 px-4 py-8 md:px-6 lg:px-8 select-none">
+		<div class="text-900 font-bold text-4xl mb-3 text-center">
+			{{ 'Everything in one place' | translate }}
+		</div>
+		<div class="text-700 text-xl text-center mb-3">
+			{{ 'We save your time for search' | translate }}
+		</div>
+		<div class="flex flex-wrap justify-content-center py-4 lg:py-6">
+			<div class="w-full max-w-30rem lg:w-6 xl:w-3 p-5">
+				<div class="mt-3 mb-2 font-medium text-900 text-2xl">{{ 'Lookup' | translate }}</div>
+				<span class="text-600 line-height-3">
+					{{ 'You can easily find a country among more than 200 countries by name or other properties.' |
+					translate }}
+				</span>
+			</div>
+			<div class="w-full max-w-30rem lg:w-6 xl:w-3 p-5">
+				<div class="mt-3 mb-2 font-medium text-900 text-2xl">{{ 'Sort & Filter' | translate }}</div>
+				<span class="text-600 line-height-3">
+					{{ 'You can sort and filter countries by name, capital, region, etc.' | translate }}
+				</span>
+			</div>
+			<div class="w-full max-w-30rem lg:w-6 xl:w-3 p-5">
+				<div class="mt-3 mb-2 font-medium text-900 text-2xl">{{ 'Export to CSV' | translate }}</div>
+				<span class="text-600 line-height-3">
+					{{ 'With export to csv function you can save your search results for later.' | translate }}
+				</span>
+			</div>
+			<div class="w-full max-w-30rem lg:w-6 xl:w-3 p-5">
+				<div class="mt-3 mb-2 font-medium text-900 text-2xl">{{ 'See full picture' | translate }}</div>
+				<span class="text-600 line-height-3">
+					{{ 'We provide detailed information about coutry, region, population, currency, language, etc.' |
+					translate }}
+				</span>
+			</div>
+		</div>
+		<div class="flex justify-content-center">
+			<p-button routerLink="/countries" label="{{ 'Lookup now' | translate }}" [size]="'large'" [rounded]="true"
+				styleClass="m-2">
+			</p-button>
+		</div>
+	</div>
+</section>

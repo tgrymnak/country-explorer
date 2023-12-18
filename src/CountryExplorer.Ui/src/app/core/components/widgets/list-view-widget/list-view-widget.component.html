@@ -1,0 +1,106 @@
+<p-table #table [columns]="selectedColumns" [dataKey]="dataKey" [value]="items" [(selection)]="selectedItems"
+	responsiveLayout="stack" [rows]="pageSize" [showCurrentPageReport]="true" [rowsPerPageOptions]="availablePageSizes"
+	[paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+	[breakpoint]="'960px'" [globalFilterFields]="globalFilterFields" [tableStyle]="{'min-width': '15rem'}">
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th class="w-2rem">
+				<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			</th>
+			<th [ngClass]="col.styleClass" *ngFor="let col of columns | sortBy:'asc':'order'"
+				[pSortableColumn]="col.sortable && col.field">
+				<div class="flex white-space-nowrap">
+					<div class="flex align-items-center justify-content-between">
+						{{col.header}}
+						<p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+					</div>
+					<div *ngIf="col.filter" class="ml-auto" (click)="$event.stopPropagation()"
+						[ngSwitch]="col.filter.type">
+						<p-columnFilter [type]="col.filter.type" display="menu" [field]="col.field">
+							<ng-template *ngSwitchCase="'in'" pTemplate="filter" let-value let-filter="filterCallback">
+								<p-dropdown *ngIf="col.filter.options" [ngModel]="value" [options]="col.filter.options()" optionLabel="label"
+									optionValue="value" [filter]="true" [showClear]="true"
+									(onChange)="filter($event.value)" placeholder="Any">
+									<ng-template let-option pTemplate="item">
+										<span>{{option.label}}</span>
+									</ng-template>
+								</p-dropdown>
+							</ng-template>
+						</p-columnFilter>
+					</div>
+				</div>
+			</th>
+			<th class="w-2rem">
+				<div class="flex cursor-pointer" (click)="opColumns.toggle($event)">
+					<i class="pi pi-table"></i>
+					<i class="pi pi-chevron-down text-xs text-500 p-1"></i>
+				</div>
+			</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-item let-columns="columns">
+		<tr style.background="{{ tcb.checked?'var(--highlight-bg)':'' }}">
+			<td class="w-2rem">
+				<p-tableCheckbox #tcb [value]="item"></p-tableCheckbox>
+			</td>
+			<td *ngFor="let col of columns">
+				<span class="p-column-title font-medium">{{ col.header }}</span>
+				<div class="flex align-items-center gap-1 cursor-pointer" [ngSwitch]="col.type"
+					[routerLink]="['./', dataKey && item[dataKey]]">
+					<i [ngClass]="col.icon" [style]="col.transformIcon && col.transformIcon(item)"></i>
+					<div *ngSwitchCase="'date'">
+						<span *ngIf="col.transformDate">
+							{{ col.transformDate(item[col.field], 'MMM d, y hh:mm a', item) }}
+						</span>
+						<span *ngIf="!col.transformDate">
+							{{ item[col.field] | date }}
+						</span>
+					</div>
+					<div *ngSwitchCase="'array'">
+						<span *ngIf="col.transformArray">
+							{{ col.transformArray(item[col.field]) || ('N/A' | translate) }}
+						</span>
+					</div>
+					<div *ngSwitchCase="'number'">
+						<span *ngIf="col.transformNumber">
+							{{ col.transformNumber(item[col.field], '1.2-2') }}
+						</span>
+					</div>
+					<div *ngSwitchDefault>
+						<span *ngIf="col.transformValue">
+							{{ col.transformValue(item[col.field]) || ('N/A' | translate) }}
+						</span>
+						<span *ngIf="!col.transformValue">
+							{{ item[col.field] || ('N/A' | translate) }}
+						</span>
+					</div>
+				</div>
+			</td>
+			<td class="w-2rem"></td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="paginatorleft">
+		<div *ngIf="selectedItems?.length" class="flex gap-2">
+			<p-button (onClick)="deselectAll()" label="{{ 'Deselect all' | translate }}"
+				styleClass="p-button-sm p-button-text"></p-button>
+			<p-button (onClick)="exportToCsv(table)" label="{{ 'Export' | translate }}" icon="pi pi-upload"
+				styleClass="p-button-sm p-button-text"></p-button>
+		</div>
+	</ng-template>
+	<ng-template pTemplate="emptymessage">
+		<tr>
+			<td colspan="100%">{{ 'No records found' | translate }}</td>
+		</tr>
+	</ng-template>
+</p-table>
+
+<p-overlayPanel #opColumns>
+	<div class="-m-3 py-2">
+		<div *ngFor="let column of columns" class="flex px-3 py-2 -mx-1"
+			style.background="{{ selectedColumns.includes(column)?'var(--highlight-bg)':'transparent' }}">
+			<p-checkbox #cb name="column" [value]="column" [(ngModel)]="selectedColumns"
+				[inputId]="column.field"></p-checkbox>
+			<label [for]="column.field" class="ml-2 cursor-pointer">{{ column.header }}</label>
+		</div>
+	</div>
+</p-overlayPanel>

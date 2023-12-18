@@ -1,0 +1,107 @@
+<div class="max-w-90rem m-auto">
+	<div class="p-2 px-6 lg:px-8 my-2">
+		<div routerLink="/countries" class="flex align-items-center gap-1 text-400 cursor-pointer">
+			<i class="pi pi-arrow-left text-xs"></i>
+			<span class="text-xl">{{ 'All countries' }}</span>
+		</div>
+	</div>
+
+	<div *ngIf="country" class="surface-section px-4 py-4 lg:py-5 lg:px-6">
+		<div class="flex flex-column gap-4">
+			<div class="text-2xl text-600 px-4">
+				{{ 'Country information' | translate }}
+			</div>
+			<div class="flex flex-column-reverse sm:flex-row gap-4">
+				<div class="flex flex-column sm:flex-row flex-wrap gap-4 w-full">
+					<div class="flex flex-column gap-4 w-15rem">
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Official name' | translate }}</div>
+							<div class="text-xl text-800">{{ country.name || ('N/A' | translate) }}</div>
+						</div>
+
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Capital' | translate }}</div>
+							<div *ngIf="!country.capitals?.length" class="text-xl text-800">
+								{{ 'N/A' | translate }}
+							</div>
+							<div *ngFor="let capital of country.capitals">
+								<div class="text-xl text-800">{{ capital }}</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="flex flex-column gap-4 w-15rem">
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Region' | translate }}</div>
+							<div class="text-xl text-800">{{ country.region || ('N/A' | translate) }}</div>
+						</div>
+
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Subregion' | translate }}</div>
+							<div class="text-xl text-800">{{ country.subregion || ('N/A' | translate) }}</div>
+						</div>
+					</div>
+
+					<div class="flex flex-column gap-4 w-15rem">
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Population' | translate }}</div>
+							<div class="text-xl text-800">{{ country.population| number }}</div>
+						</div>
+
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Area' | translate }}</div>
+							<div class="text-xl text-800">{{ country.area | number:'1.2-2' }}</div>
+						</div>
+					</div>
+
+					<div class="flex flex-column gap-4">
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Currency' | translate }}</div>
+							<div *ngIf="!country.currencies?.length" class="text-xl text-800">
+								{{ 'N/A' | translate }}
+							</div>
+							<div class="flex flex-wrap gap-2">
+								<div *ngFor="let currency of country.currencies">
+									<div class="flex align-items-center gap-1">
+										<div>{{ currency.name }}</div>
+										<div class="text-sm text-400">({{ currency.symbol }})</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="flex flex-column gap-1 px-4">
+							<div class="text-400">{{ 'Language' | translate }}</div>
+							<div *ngIf="!country.languages?.length" class="text-xl text-800">
+								{{ 'N/A' | translate }}
+							</div>
+							<div class="flex flex-wrap gap-2">
+								<div *ngFor="let language of country.languages">
+									<div class="surface-200 text-600 border-round-2xl text-sm p-1 px-2">
+										{{ language.name }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="w-12 sm:w-10 md:w-4 px-4">
+					<p-image [src]="country.flag" [preview]="true" [alt]="country.name" width="100%">
+						<ng-template pTemplate="indicator">
+							<div class="text-white text-lg">{{ 'Country flag preview' | translate }}</div>
+						</ng-template>
+					</p-image>
+				</div>
+			</div>
+			<div class="flex flex-column gap-4">
+				<div class="flex flex-column gap-1 px-4">
+					<div class="text-400">{{ 'External links' | translate }}</div>
+					<a [href]="country.map" target="_blank" class="flex align-items-center gap-1">
+						<span>{{ 'Google maps' | translate }}</span>
+						<i class="pi pi-external-link text-sm"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

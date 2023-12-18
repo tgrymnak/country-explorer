@@ -1,0 +1,4 @@
+{
+	"apiUrl": "https://localhost:7270/api/v1",
+	"messageLifetime": 1000
+}
